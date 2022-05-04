@@ -3,6 +3,11 @@ import { ConfigModule } from '@nestjs/config';
 import { RoomModule } from 'room/room.module';
 
 @Module({
-  imports: [RoomModule, ConfigModule.forRoot()],
+  imports: [
+    RoomModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+  ],
 })
 export class AppModule {}
