@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { birds, cats } from "~/utils/animals";
 import { Lobby } from "./Lobby";
 import { Room } from "./Room";
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const VideoChat = () => {
   const [username, setUsername] = useState(
@@ -31,10 +32,10 @@ export const VideoChat = () => {
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       setSubmitting(true);
-      const data = await fetch("api/video/token", {
+      const data = await fetch(API_URL + "/room", {
         method: "POST",
         body: JSON.stringify({
-          identity: username,
+          username,
           room: roomName,
         }),
         headers: {
