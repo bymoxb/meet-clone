@@ -1,0 +1,5 @@
+export default {
+  TWILIO_API_KEY_SID: process.env.TWILIO_API_KEY_SID,
+  TWILIO_API_KEY_SECRET: process.env.TWILIO_API_KEY_SECRET,
+  TWILIO_ACCOUNT_SID: process.env.TWILIO_ACCOUNT_SID,
+};
