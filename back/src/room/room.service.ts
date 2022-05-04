@@ -1,30 +1,20 @@
 import { Injectable } from '@nestjs/common';
-import config from 'config/twilio';
-import { jwt, Twilio } from 'twilio';
-import { v4 as uuidv4 } from 'uuid';
+import { TwilioService } from 'twilio/twilio.service';
 import { GenerateToken } from './dto/generate-token.dto';
-
-const { TWILIO_ACCOUNT_SID, TWILIO_API_KEY_SECRET, TWILIO_API_KEY_SID } =
-  config;
-
-const twilioClient = new Twilio(TWILIO_API_KEY_SID, TWILIO_API_KEY_SECRET, {
-  accountSid: TWILIO_ACCOUNT_SID,
-});
 
 @Injectable()
 export class RoomService {
+  constructor(private twilioService: TwilioService) {}
+
   private async findOrCreateRoom(roomName: string) {
     try {
       // see if the room exists already. If it doesn't, this will throw
       // error 20404.
-      return await twilioClient.video.rooms(roomName).fetch();
+      return await this.twilioService.findRoom(roomName);
     } catch (error: any) {
       // the room was not found, so create it
       if (error.code == 20404) {
-        return await twilioClient.video.rooms.create({
-          uniqueName: roomName,
-          type: 'go',
-        });
+        return await this.twilioService.createRoom(roomName);
       } else {
         // let other errors bubble up
         throw error;
@@ -32,19 +22,11 @@ export class RoomService {
     }
   }
 
-  private getAccessToken(roomName) {
+  private getAccessToken(room, identity: string) {
     // create an access token
-    const token = new jwt.AccessToken(
-      TWILIO_ACCOUNT_SID,
-      TWILIO_API_KEY_SID,
-      TWILIO_API_KEY_SECRET,
-      // generate a random unique identity for this participant
-      { identity: uuidv4() },
-    );
+    const token = this.twilioService.createAccessToken(identity);
     // create a video grant for this specific room
-    const videoGrant = new jwt.AccessToken.VideoGrant({
-      room: roomName,
-    });
+    const videoGrant = this.twilioService.videoGrant(room);
 
     // add the video grant
     token.addGrant(videoGrant);
@@ -55,8 +37,9 @@ export class RoomService {
   }
 
   async generateToken(request: GenerateToken) {
-    const { room } = request;
-    const roomName = await this.findOrCreateRoom(room);
-    return this.getAccessToken(roomName);
+    const { room: roomName, username } = request;
+    const room = await this.findOrCreateRoom(roomName);
+    const token = this.getAccessToken(room, username);
+    return token;
   }
 }
