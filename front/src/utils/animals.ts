@@ -1,5 +1,5 @@
 // https://github.com/faker-js/faker/blob/main/src/locales/en/animal/bird.ts
-export const birds = [
+const birds = [
   "Red-throated Loon",
   "Arctic Loon",
   "Pacific Loon",
@@ -917,7 +917,7 @@ export const birds = [
 ];
 
 // https://github.com/faker-js/faker/blob/main/src/locales/en/animal/cat.ts
-export const cats = [
+const cats = [
   "Abyssinian",
   "American Bobtail",
   "American Curl",
@@ -974,3 +974,11 @@ export const cats = [
   "Turkish Angora",
   "Turkish Van",
 ];
+
+export function getRandom(type: "bird" | "cat") {
+  if (type === "bird") {
+    return birds[Math.floor(Math.random() * birds.length)] + "-" + Date.now();
+  } else {
+    return cats[Math.floor(Math.random() * cats.length)];
+  }
+}

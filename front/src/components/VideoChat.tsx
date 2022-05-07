@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import join_call from "src/assets/sound/join_call.ogg";
 import leave_call from "src/assets/sound/leave_call.ogg";
-import { birds, cats } from "src/utils/animals";
+import { getRandom } from "src/utils/animals";
 import { Lobby } from "./Lobby";
 import { Room } from "./Room";
 
@@ -9,12 +9,8 @@ const audioEnter = new Audio(join_call);
 const audioLeave = new Audio(leave_call);
 
 export const VideoChat = () => {
-  const [username, setUsername] = useState(
-    birds[Math.floor(Math.random() * birds.length)] + "-" + Date.now()
-  );
-  const [roomName, setRoomName] = useState(
-    cats[Math.floor(Math.random() * cats.length)]
-  );
+  const [username, setUsername] = useState(getRandom("bird"));
+  const [roomName, setRoomName] = useState(getRandom("cat"));
   const [submitting, setSubmitting] = useState(false);
   const [token, setToken] = useState<string | null>(null);
 
@@ -56,6 +52,8 @@ export const VideoChat = () => {
   const handleLogout = useCallback(() => {
     setToken(null);
     audioLeave.play();
+    setRoomName(getRandom("cat"));
+    setUsername(getRandom("bird"));
   }, []);
 
   return token ? (
