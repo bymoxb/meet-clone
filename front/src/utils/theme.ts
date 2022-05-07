@@ -1,4 +1,4 @@
-import { Themes } from "~/providers/ThemeProvider";
+import { Themes } from "src/providers/ThemeProvider";
 
 export const getInitialTheme = (): Themes => {
   if (typeof window !== "undefined" && window.localStorage) {

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getInitialTheme } from "~/utils/theme";
+import { getInitialTheme } from "src/utils/theme";
 
 // types
 

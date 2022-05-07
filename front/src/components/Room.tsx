@@ -36,6 +36,8 @@ export const Room: React.FunctionComponent<RoomProps> = ({
       name: roomName,
     })
       .then((room) => {
+        console.log({ room });
+
         setRoom(room);
         room.on("participantConnected", participantConnected);
         room.on("participantDisconnected", participantDisconnected);
@@ -101,7 +103,7 @@ export const Room: React.FunctionComponent<RoomProps> = ({
       {/* <h3 className="text-xl">Participantes</h3> */}
       {/* <div className="overflow-auto">{remoteParticipants}</div> */}
       <div className="flex md:flex-col md:w-2/12 overflow-hidden gap-4 flex-row">
-        <Participant
+        {/* <Participant
           key={"awdad1"}
           containerProps={{
             className: "h-48 flex-shrink-0",
@@ -165,7 +167,7 @@ export const Room: React.FunctionComponent<RoomProps> = ({
             className: "h-full",
           }}
           participant={room?.localParticipant}
-        />
+        /> */}
       </div>
       {/* </div> */}
     </div>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import GoogleMeetLogo from "~/assets/img/google_meet.png";
-import { ToogleTheme } from "~/components/ToogleTheme";
-import { VideoChat } from "~/components/VideoChat";
-import { ThemeProvider } from "~/providers/ThemeProvider";
+import GoogleMeetLogo from "src/assets/img/google_meet.png";
+import { VideoChat } from "src/components/VideoChat";
+import { ThemeProvider } from "src/providers/ThemeProvider";
+import { ToogleTheme } from "src/components/ToogleTheme";
 
 const App = () => (
   <ThemeProvider>

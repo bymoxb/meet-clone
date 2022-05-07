@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import MiduFace from "~/assets/img/midudev.png";
+import MiduFace from "src/assets/img/midudev.png";
 
 type LobbyProps = {
   username: string;

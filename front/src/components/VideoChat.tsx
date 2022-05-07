@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
-import { birds, cats } from "~/utils/animals";
+import { birds, cats } from "src/utils/animals";
 import { Lobby } from "./Lobby";
 import { Room } from "./Room";
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = "";
 
 export const VideoChat = () => {
   const [username, setUsername] = useState(

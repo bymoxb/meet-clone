@@ -12,8 +12,8 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
   videoProps,
   containerProps,
 }) => {
-  const [videoTracks, setVideoTracks] = useState<Video.VideoTrack[]>([]);
-  const [audioTracks, setAudioTracks] = useState<Video.AudioTrack[]>([]);
+  const [videoTracks, setVideoTracks] = useState<any[]>([]);
+  const [audioTracks, setAudioTracks] = useState<any[]>([]);
 
   const videoRef = useRef<any>();
   const audioRef = useRef<any>();
@@ -29,6 +29,8 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
       .filter((track) => track !== null);
 
   useEffect(() => {
+    console.log({ participant });
+
     setVideoTracks(trackpubsToTracks(participant.videoTracks));
     setAudioTracks(trackpubsToTracks(participant.audioTracks));
 
