@@ -32,7 +32,7 @@ export const VideoChat = () => {
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       setSubmitting(true);
-      const data = await fetch("/room", {
+      const data = await fetch("api/room", {
         method: "POST",
         body: JSON.stringify({
           username,
