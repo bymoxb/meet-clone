@@ -1,8 +1,12 @@
 import { useCallback, useState } from "react";
+import join_call from "src/assets/sound/join_call.ogg";
+import leave_call from "src/assets/sound/leave_call.ogg";
 import { birds, cats } from "src/utils/animals";
 import { Lobby } from "./Lobby";
 import { Room } from "./Room";
-const API_URL = "";
+
+const audioEnter = new Audio(join_call);
+const audioLeave = new Audio(leave_call);
 
 export const VideoChat = () => {
   const [username, setUsername] = useState(
@@ -32,7 +36,7 @@ export const VideoChat = () => {
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       setSubmitting(true);
-      const data = await fetch(API_URL + "/room", {
+      const data = await fetch("/room", {
         method: "POST",
         body: JSON.stringify({
           username,
@@ -44,12 +48,14 @@ export const VideoChat = () => {
       }).then((res) => res.json());
       setSubmitting(false);
       setToken(data.data);
+      audioEnter.play();
     },
     [roomName, username]
   );
 
   const handleLogout = useCallback(() => {
     setToken(null);
+    audioLeave.play();
   }, []);
 
   return token ? (

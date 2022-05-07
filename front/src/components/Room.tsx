@@ -36,8 +36,6 @@ export const Room: React.FunctionComponent<RoomProps> = ({
       name: roomName,
     })
       .then((room) => {
-        console.log({ room });
-
         setRoom(room);
         room.on("participantConnected", participantConnected);
         room.on("participantDisconnected", participantDisconnected);
