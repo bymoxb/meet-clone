@@ -1,0 +1,50 @@
+version: "3"
+services:
+  app_back_meet_clone:
+    container_name: app_back_meet_clone
+    env_file:
+      - ./back/.env
+    build:
+      context: ./back
+      dockerfile: dockerfile
+    networks:
+      - meet_clone_net
+    expose:
+      - 5000
+    # ports:
+    #   - 5000:5000
+    volumes:
+      - ./back:/usr/src/app
+
+  app_front_meet_clone:
+    container_name: app_front_meet_clone
+    build:
+      context: ./front
+      dockerfile: dockerfile
+    networks:
+      - meet_clone_net
+    expose:
+      - 3000
+    # ports:
+    #   - 3000:3000
+    volumes:
+      - ./front:/usr/src/app
+
+  nginx_meet_clone:
+    build:
+      context: ./nginx
+      dockerfile: dockerfile
+    ports:
+      - 80:80
+    depends_on:
+      - app_back_meet_clone
+      - app_front_meet_clone
+    networks:
+      - meet_clone_net
+    # links:
+    #   - app_front_meet_clone
+    #   - app_back_meet_clone
+
+networks:
+  meet_clone_net:
+    driver: bridge

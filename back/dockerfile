@@ -1,0 +1,12 @@
+FROM node:16
+
+WORKDIR /app
+
+COPY . .
+
+RUN npm i --no-audit --no-fund --no-optional
+RUN npm run build
+
+EXPOSE 5000
+
+CMD ["node","dist/main"]
