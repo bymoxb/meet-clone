@@ -29,8 +29,6 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
       .filter((track) => track !== null);
 
   useEffect(() => {
-    console.log({ participant });
-
     setVideoTracks(trackpubsToTracks(participant.videoTracks));
     setAudioTracks(trackpubsToTracks(participant.audioTracks));
 

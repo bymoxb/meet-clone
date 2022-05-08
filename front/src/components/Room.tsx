@@ -22,6 +22,8 @@ export const Room: React.FunctionComponent<RoomProps> = ({
   useEffect(() => {
     setLoading(true);
 
+    console.log({ token, roomName });
+
     const participantConnected = (participant: Video.RemoteParticipant) => {
       setParticipants((prevParticipants) => [...prevParticipants, participant]);
     };
@@ -58,7 +60,7 @@ export const Room: React.FunctionComponent<RoomProps> = ({
         }
       });
     };
-  }, [roomName, token]);
+  }, []);
 
   const remoteParticipants = participants.map((participant) => (
     <Participant key={participant.sid} participant={participant} />
@@ -70,8 +72,8 @@ export const Room: React.FunctionComponent<RoomProps> = ({
       <span className="text-3xl">Cargando...</span>
     </div>
   ) : (
-    <div className="flex flex-col sm:flex-row h-full border border-blue-500">
-      <div className="md:w-10/12 border border-red-500">
+    <div className="flex flex-col sm:flex-row h-full">
+      <div className="md:w-10/12">
         <div className="h-full relative border">
           {room && (
             <Participant
