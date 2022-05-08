@@ -7,43 +7,80 @@ services:
     build:
       context: ./back
       dockerfile: dockerfile
-    networks:
-      - meet_clone_net
+    restart: always
     expose:
       - 5000
-    # ports:
-    #   - 5000:5000
     volumes:
       - ./back:/usr/src/app
+    networks:
+      - meet_clone_net
 
   app_front_meet_clone:
     container_name: app_front_meet_clone
     build:
       context: ./front
       dockerfile: dockerfile
-    networks:
-      - meet_clone_net
+    restart: always
     expose:
       - 3000
-    # ports:
-    #   - 3000:3000
     volumes:
       - ./front:/usr/src/app
+    networks:
+      - meet_clone_net
 
   nginx_meet_clone:
     build:
       context: ./nginx
       dockerfile: dockerfile
-    ports:
-      - 80:80
+    restart: always
+    expose:
+      - 80
     depends_on:
       - app_back_meet_clone
       - app_front_meet_clone
     networks:
       - meet_clone_net
-    # links:
-    #   - app_front_meet_clone
-    #   - app_back_meet_clone
+    environment:
+      - VIRTUAL_HOST=meet-clone.xyz,www.meet-clone.xyz
+      - LETSENCRYPT_HOST=meet-clone.xyz,www.meet-clone.xyz
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs:ro
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+    depends_on:
+      - nginx_meet_clone
+    networks:
+      - meet_clone_net
+
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - vhostd:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    depends_on:
+      - nginx-proxy
+    networks:
+      - meet_clone_net
+
+volumes:
+  certs:
+  html:
+  vhostd:
 
 networks:
   meet_clone_net:
