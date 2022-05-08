@@ -1,8 +1,8 @@
 import { useMemo } from "react";
 import { Themes, useThemeContext } from "../providers/ThemeProvider";
-import "./../assets/css/toogle-theme.css";
+import "./../assets/css/toggle-theme.css";
 
-export const ToogleTheme = () => {
+export const ToggleTheme = () => {
   const { theme, setTheme } = useThemeContext();
 
   const isDark = useMemo(() => theme === Themes.dark, [theme]);

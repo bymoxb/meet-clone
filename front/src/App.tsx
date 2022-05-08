@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import GoogleMeetLogo from "src/assets/img/google_meet.png";
+import { ToggleTheme } from "src/components/ToggleTheme";
 import { VideoChat } from "src/components/VideoChat";
 import { ThemeProvider } from "src/providers/ThemeProvider";
-import { ToogleTheme } from "src/components/ToogleTheme";
 
 const App = () => (
   <ThemeProvider>
@@ -32,7 +32,7 @@ const AppBase = () => {
           <span>
             {now.toLocaleTimeString()} - {now.toDateString()}
           </span>
-          <ToogleTheme />
+          <ToggleTheme />
         </div>
       </header>
       <main className="flex-1 container mx-auto px-4 sm:px-0">
