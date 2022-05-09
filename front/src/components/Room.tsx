@@ -60,7 +60,7 @@ export const Room: React.FunctionComponent<RoomProps> = ({
         }
       });
     };
-  }, []);
+  }, [roomName, token]);
 
   const remoteParticipants = participants.map((participant) => (
     <Participant
@@ -91,7 +91,7 @@ export const Room: React.FunctionComponent<RoomProps> = ({
               className: "h-full",
             }}
             videoProps={{
-              className: "h-full object-cover",
+              className: "mx-auto h-full object-cover",
             }}
           />
         )}
