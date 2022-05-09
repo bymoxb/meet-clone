@@ -63,7 +63,16 @@ export const Room: React.FunctionComponent<RoomProps> = ({
   }, []);
 
   const remoteParticipants = participants.map((participant) => (
-    <Participant key={participant.sid} participant={participant} />
+    <Participant
+      key={participant.sid}
+      participant={participant}
+      containerProps={{
+        className: "shrink-0 h-full md:h-fit",
+      }}
+      videoProps={{
+        className: "h-full",
+      }}
+    />
   ));
 
   return loading ? (
@@ -72,104 +81,36 @@ export const Room: React.FunctionComponent<RoomProps> = ({
       <span className="text-3xl">Cargando...</span>
     </div>
   ) : (
-    <div className="flex flex-col sm:flex-row h-full">
-      <div className="md:w-10/12">
-        <div className="h-full relative border">
-          {room && (
-            <Participant
-              key={room.localParticipant.sid}
-              participant={room.localParticipant}
-              containerProps={{
-                className: "h-full",
-              }}
-              videoProps={{
-                className: "h-full object-cover",
-              }}
-            />
-          )}
-          <div className="absolute w-full bottom-0 left-0 p-6">
-            <div className="flex justify-center">
-              <button
-                className="bg-red-600 hover:bg-red-500 rounded-2xl px-4"
-                onClick={handleLogout}
-              >
-                <Callend />
-              </button>
-            </div>
+    <div className="h-full flex flex-col md:flex-row gap-2">
+      <div className="relative md:w-10/12 h-full">
+        {room && (
+          <Participant
+            key={room.localParticipant.sid}
+            participant={room.localParticipant}
+            containerProps={{
+              className: "h-full",
+            }}
+            videoProps={{
+              className: "h-full object-cover",
+            }}
+          />
+        )}
+        <div className="absolute w-full bottom-0 left-0 p-6">
+          <div className="flex justify-center">
+            <button
+              className="bg-red-600 hover:bg-red-500 rounded-2xl px-4"
+              onClick={handleLogout}
+            >
+              <Callend />
+            </button>
           </div>
         </div>
       </div>
-      {/* <div className="border border-red-500"> */}
-      {/* <h3 className="text-xl">Participantes</h3> */}
-      {/* <div className="overflow-auto">{remoteParticipants}</div> */}
-      <div className="flex md:flex-col md:w-2/12 overflow-hidden gap-4 flex-row">
-        {/* <Participant
-          key={"awdad1"}
-          containerProps={{
-            className: "h-48 flex-shrink-0",
-          }}
-          videoProps={{
-            className: "h-full",
-          }}
-          participant={room?.localParticipant}
-        />
-
-        <Participant
-          key={"awdad3"}
-          containerProps={{
-            className: "h-48 flex-shrink-0",
-          }}
-          videoProps={{
-            className: "h-full",
-          }}
-          participant={room?.localParticipant}
-        />
-
-        <Participant
-          key={"awdad6"}
-          containerProps={{
-            className: "h-48 flex-shrink-0",
-          }}
-          videoProps={{
-            className: "h-full",
-          }}
-          participant={room?.localParticipant}
-        />
-
-        <Participant
-          key={"awd2d6"}
-          containerProps={{
-            className: "h-48 flex-shrink-0",
-          }}
-          videoProps={{
-            className: "h-full",
-          }}
-          participant={room?.localParticipant}
-        />
-
-        <Participant
-          key={"awd4d6"}
-          containerProps={{
-            className: "h-48 flex-shrink-0",
-          }}
-          videoProps={{
-            className: "h-full",
-          }}
-          participant={room?.localParticipant}
-        />
-
-        <Participant
-          key={"awd5d6"}
-          containerProps={{
-            className: "h-48 flex-shrink-0",
-          }}
-          videoProps={{
-            className: "h-full",
-          }}
-          participant={room?.localParticipant}
-        /> */}
+      <div className="md:w-2/12 overflow-hidden md:h-full">
+        <div className="participants-container md:h-full overflow-auto h-24 flex flex-row md:flex-col gap-4 md:px-2">
+          {remoteParticipants}
+        </div>
       </div>
-      {/* </div> */}
     </div>
   );
 };

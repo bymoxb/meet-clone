@@ -35,11 +35,106 @@ const AppBase = () => {
           <ToggleTheme />
         </div>
       </header>
-      <main className="flex-1 container mx-auto px-4 sm:px-0">
+      <main className="flex-1 container h-full mx-auto px-4 sm:px-0 overflow-hidden">
+        {/* <Room /> */}
         <VideoChat />
       </main>
     </div>
   );
 };
+
+// const Room = () => {
+//   return (
+//     <div className="h-full flex flex-col md:flex-row gap-2">
+//       <div className="relative md:w-10/12 h-full">
+//         <Participant
+//           // key={room.localParticipant.sid}
+//           // participant={room.localParticipant}
+//           containerProps={{
+//             className: "h-full",
+//             // className: "h-full border border-red-500 object-fit",
+//           }}
+//           videoProps={{
+//             className: "mx-auto h-full object-cover",
+//             // className: "h-full object-cover",
+//           }}
+//         />
+//         {/* {room && (
+//           )} */}
+//         <div className="absolute w-full bottom-0 left-0 p-6">
+//           <div className="flex justify-center">
+//             <button
+//               className="bg-red-600 hover:bg-red-500 rounded-2xl px-4"
+//               // onClick={handleLogout}
+//             >
+//               <Callend />
+//             </button>
+//           </div>
+//         </div>
+//         {/* <div className="h-full relative border">
+//         </div> */}
+//       </div>
+//       <div className="md:w-2/12 overflow-hidden md:h-full">
+//         <div className="participants-container md:h-full overflow-auto h-24 flex flex-row md:flex-col gap-4 md:px-2">
+//           {[...Array(15).keys()].map((i) => (
+//             <Participant
+//               key={i}
+//               // key={room.localParticipant.sid}
+//               // participant={room.localParticipant}
+//               containerProps={{
+//                 className: "shrink-0 h-full md:h-fit",
+//               }}
+//               videoProps={{
+//                 className: "h-full",
+//               }}
+//             />
+//           ))}
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// type ParticipantProps = {
+//   containerProps?: React.HTMLAttributes<HTMLDivElement>;
+//   videoProps?: React.HTMLAttributes<HTMLVideoElement>;
+// };
+
+// const Participant: React.FunctionComponent<ParticipantProps> = ({
+//   containerProps,
+//   videoProps,
+// }) => {
+//   const videoRef = useRef<any>(null);
+
+//   useEffect(() => {
+//     getVideo();
+//   }, [videoRef]);
+
+//   const getVideo = () => {
+//     navigator.mediaDevices
+//       .getUserMedia({ video: { width: 640 } })
+//       .then((stream) => {
+//         let video = videoRef.current;
+//         video.srcObject = stream;
+//         video.play();
+//       })
+//       .catch((err) => {
+//         console.error("error:", err);
+//       });
+//   };
+
+//   return (
+//     <div {...containerProps}>
+//       {/* <h3>{participant.identity}</h3> */}
+//       <video
+//         ref={videoRef}
+//         // autoPlay
+//         {...videoProps}
+//         className={"rounded-xl " + (videoProps?.className || "")}
+//       />
+//       {/* <audio ref={audioRef} autoPlay muted={true} /> */}
+//     </div>
+//   );
+// };
 
 export default App;
