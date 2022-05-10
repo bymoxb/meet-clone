@@ -87,7 +87,7 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
         {...videoProps}
         className={"rounded-xl " + videoProps?.className || ""}
       />
-      <audio ref={audioRef} autoPlay muted={true} />
+      <audio ref={audioRef} autoPlay />
     </div>
   );
 };
