@@ -83,6 +83,11 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
     }
   }, [audioTracks]);
 
+  useEffect(() => {
+    audioRef.current.defaultMuted = isMuted;
+    audioRef.current.muted = isMuted;
+  }, [isMuted]);
+
   return (
     <div {...containerProps}>
       <div className="h-full relative flex justify-center">
