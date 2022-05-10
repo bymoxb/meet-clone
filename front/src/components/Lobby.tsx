@@ -29,7 +29,11 @@ export const Lobby: React.FunctionComponent<LobbyProps> = ({
             Clon de <Link link="https://meet.google.com" text="Google Meet" />{" "}
             desarrollado con <Link link="https://reactjs.org" text="React" />,
             <Link link="https://tailwindcss.com" text="Tailwind CSS" />,{" "}
-            <Link link="https://nestjs.com" text="NestJS" />
+            <Link link="https://nestjs.com" text="NestJS" />,{" "}
+            <Link
+              link="https://www.twilio.com/docs/video"
+              text="Twilio Video"
+            />
           </p>
         </div>
         <div>
