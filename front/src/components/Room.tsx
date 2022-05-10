@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Video from "twilio-video";
-import Loading from "./Loading";
+import Loading from "./icons/Loading";
 import { Participant } from "./Participant";
 import { Toolbar } from "./Toolbar";
 
