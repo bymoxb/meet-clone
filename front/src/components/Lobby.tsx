@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import MiduFace from "src/assets/img/midudev.png";
+import { Link } from "./Link";
 
 type LobbyProps = {
   username: string;
@@ -25,8 +26,10 @@ export const Lobby: React.FunctionComponent<LobbyProps> = ({
           <h2>Videoconferencias premium.</h2>
           <h2>Ahora gratis para todos.</h2>
           <p className="text-base">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe
-            perspiciatis, aliquam quis dolores doloremque.
+            Clon de <Link link="https://meet.google.com" text="Google Meet" />{" "}
+            desarrollado con <Link link="https://reactjs.org" text="React" />,
+            <Link link="https://tailwindcss.com" text="Tailwind CSS" />,{" "}
+            <Link link="https://nestjs.com" text="NestJS" />
           </p>
         </div>
         <div>
@@ -74,36 +77,18 @@ export const Lobby: React.FunctionComponent<LobbyProps> = ({
             <h3 className="lg:text-xl text-gray-800 dark:text-white font-semibold">
               Sigue a este Dios, no te arrepentirás
             </h3>
-            <ul className="flex gap-3 text-blue-600 dark:text-gray-300">
+            <ul className="flex gap-3">
               <li>
-                <a
-                  className="hover:underline"
-                  href="https://www.twitch.tv/midudev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Twitch
-                </a>
+                <Link link="https://www.twitch.tv/midudev" text="Twitch" />
               </li>
               <li>
-                <a
-                  className="hover:underline"
-                  href="https://twitter.com/midudev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Twitter
-                </a>
+                <Link
+                  link="https://www.instagram.com/midu.dev"
+                  text="Instagram"
+                />
               </li>
               <li>
-                <a
-                  className="hover:underline"
-                  href="https://www.instagram.com/midu.dev/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Instagram
-                </a>
+                <Link link="https://twitter.com/midudev" text="Twitter" />
               </li>
             </ul>
           </div>
