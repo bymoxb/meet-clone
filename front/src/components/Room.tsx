@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Video from "twilio-video";
@@ -5,6 +6,7 @@ import Callend from "./Callend";
 import { MicIcon } from "./icons/MicIcon";
 import { ShareIcon } from "./icons/ShareIcon";
 import { VolIcon } from "./icons/VolIcon";
+import { VolOffIcon } from "./icons/VolOffIcon";
 import Loading from "./Loading";
 import { Participant } from "./Participant";
 
@@ -80,6 +82,17 @@ export const Room: React.FunctionComponent<RoomProps> = ({
     navigator.clipboard.writeText(roomName).then(() => toast("Copiado! 👌"));
   };
 
+  const [isMuted, setIsMuted] = useState(true);
+
+  const onMute = () => {
+    const text = !isMuted
+      ? "Ensordecido! 🔇"
+      : "Ensordecimiento desactivado! 🔉";
+
+    setIsMuted((p) => !p);
+    toast(text);
+  };
+
   return loading ? (
     <div className="w-full h-full flex items-center justify-center">
       <Loading />
@@ -121,10 +134,18 @@ export const Room: React.FunctionComponent<RoomProps> = ({
               <MicIcon className="m-auto text-2xl" />
             </button>
             <button
-              className="bg-gray-900 opacity-90 hover:bg-gray-800 w-12 rounded-full"
-              title={"Silenciar"}
+              className={classNames("w-12 rounded-full", {
+                "bg-gray-900 opacity-90 hover:bg-gray-800": !isMuted,
+                "bg-red-600 hover:bg-red-500": isMuted,
+              })}
+              onClick={onMute}
+              title={isMuted ? "Desactivar ensordecimiento" : "Ensordecer"}
             >
-              <VolIcon className="m-auto text-2xl" />
+              {isMuted ? (
+                <VolOffIcon className="m-auto text-2xl" />
+              ) : (
+                <VolIcon className="m-auto text-2xl" />
+              )}
             </button>
             <button
               className="bg-red-600 hover:bg-red-500 px-3 rounded-2xl"

@@ -5,12 +5,14 @@ type ParticipantProps = {
   participant: any;
   containerProps?: React.HTMLAttributes<HTMLDivElement>;
   videoProps?: React.HTMLAttributes<HTMLVideoElement>;
+  isMuted?: boolean;
 };
 
 export const Participant: React.FunctionComponent<ParticipantProps> = ({
   participant,
   videoProps,
   containerProps,
+  isMuted,
 }) => {
   const [videoTracks, setVideoTracks] = useState<any[]>([]);
   const [audioTracks, setAudioTracks] = useState<any[]>([]);
@@ -87,7 +89,7 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
         {...videoProps}
         className={"rounded-xl " + videoProps?.className || ""}
       />
-      <audio ref={audioRef} autoPlay />
+      <audio ref={audioRef} autoPlay muted={isMuted} />
     </div>
   );
 };
