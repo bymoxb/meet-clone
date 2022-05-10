@@ -66,7 +66,7 @@ export const Lobby: React.FunctionComponent<LobbyProps> = ({
             </button>
           </form>
           <small className="">
-            Ingresa el id de una sessión existente o crea una nueva
+            Ingresa el id de una sesión existente o crea una nueva
           </small>
         </div>
       </div>
