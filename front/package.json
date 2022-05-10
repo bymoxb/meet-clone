@@ -12,8 +12,8 @@
     "classnames": "2.3.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "twilio-video": "2.21.1",
-    "web-vitals": "^2.1.4"
+    "react-toastify": "9.0.1",
+    "twilio-video": "2.21.1"
   },
   "devDependencies": {
     "react-scripts": "5.0.1",
