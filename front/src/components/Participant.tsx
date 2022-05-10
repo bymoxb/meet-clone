@@ -80,6 +80,11 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
     }
   }, [audioTracks]);
 
+  useEffect(() => {
+    audioRef.current.defaultMuted = isMuted;
+    audioRef.current.muted = isMuted;
+  }, [isMuted]);
+
   return (
     <div {...containerProps}>
       {/* <h3>{participant.identity}</h3> */}
@@ -89,7 +94,7 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
         {...videoProps}
         className={"rounded-xl " + videoProps?.className || ""}
       />
-      <audio ref={audioRef} autoPlay muted={isMuted} />
+      <audio ref={audioRef} autoPlay />
     </div>
   );
 };
