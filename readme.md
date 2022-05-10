@@ -20,3 +20,4 @@
 3. [Building a theme switch component](https://web.dev/building-a-theme-switch-component)
 4. [How to Dark Mode in React and Tailwind CSS](https://jeffjadulco.com/blog/dark-mode-react-tailwind)
 5. [Creating a server with Node/Express](https://www.twilio.com/docs/video/tutorials/get-started-with-twilio-video-node-express-server)
+6. [Material Symbols](https://fonts.google.com/icons)
