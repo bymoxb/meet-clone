@@ -1,14 +1,8 @@
-import classNames from "classnames";
 import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
 import Video from "twilio-video";
-import Callend from "./Callend";
-import { MicIcon } from "./icons/MicIcon";
-import { ShareIcon } from "./icons/ShareIcon";
-import { VolIcon } from "./icons/VolIcon";
-import { VolOffIcon } from "./icons/VolOffIcon";
 import Loading from "./Loading";
 import { Participant } from "./Participant";
+import { Toolbar } from "./Toolbar";
 
 type RoomProps = {
   roomName: string;
@@ -78,22 +72,9 @@ export const Room: React.FunctionComponent<RoomProps> = ({
     />
   ));
 
-  const clipCopy = () => {
-    navigator.clipboard.writeText(roomName).then(() => toast("Copiado! 👌"));
-  };
+  const [isMuted, setIsMuted] = useState(false);
 
-  const [isMuted, setIsMuted] = useState(true);
-
-  const onMute = () => {
-    const text = !isMuted
-      ? "Ensordecido! 🔇"
-      : "Ensordecimiento desactivado! 🔉";
-
-    setIsMuted((p) => !p);
-    toast(text);
-  };
-
-  return loading ? (
+  return loading || !room ? (
     <div className="w-full h-full flex items-center justify-center">
       <Loading />
       <span className="text-3xl">Cargando...</span>
@@ -101,58 +82,24 @@ export const Room: React.FunctionComponent<RoomProps> = ({
   ) : (
     <div className="h-full flex flex-col md:flex-row gap-2">
       <div className="relative md:w-10/12 h-full">
-        {room && (
-          <Participant
-            key={room.localParticipant.sid}
-            participant={room.localParticipant}
-            containerProps={{
-              className: "h-full",
-            }}
-            videoProps={{
-              className: "mx-auto h-full object-cover",
-            }}
-          />
-        )}
+        <Participant
+          key={room.localParticipant.sid}
+          participant={room.localParticipant}
+          containerProps={{
+            className: "h-full",
+          }}
+          videoProps={{
+            className: "mx-auto h-full object-cover",
+          }}
+        />
         <div className="absolute w-full bottom-0 left-0 p-6">
           <div className="text-white flex justify-center gap-2 h-12 w-full">
-            <>
-              <button
-                className="bg-gray-900 opacity-90 hover:bg-gray-800 w-12 rounded-full"
-                title="Copiar id de la sesión"
-                onClick={clipCopy}
-                // id="clipcopy-button"
-                // ref={setReferenceElement}
-                // onMouseLeave={() => setTextClipCopy("Copiar id room")}
-              >
-                <ShareIcon className="m-auto text-2xl" />
-              </button>
-            </>
-            <button
-              className="bg-gray-900 opacity-90 hover:bg-gray-800 w-12 rounded-full"
-              title={"Apagar"}
-            >
-              <MicIcon className="m-auto text-2xl" />
-            </button>
-            <button
-              className={classNames("w-12 rounded-full", {
-                "bg-gray-900 opacity-90 hover:bg-gray-800": !isMuted,
-                "bg-red-600 hover:bg-red-500": isMuted,
-              })}
-              onClick={onMute}
-              title={isMuted ? "Desactivar ensordecimiento" : "Ensordecer"}
-            >
-              {isMuted ? (
-                <VolOffIcon className="m-auto text-2xl" />
-              ) : (
-                <VolIcon className="m-auto text-2xl" />
-              )}
-            </button>
-            <button
-              className="bg-red-600 hover:bg-red-500 px-3 rounded-2xl"
-              onClick={handleLogout}
-            >
-              <Callend className="m-auto text-4xl" />
-            </button>
+            <Toolbar
+              isMuted={isMuted}
+              setIsMuted={setIsMuted}
+              handleLogout={handleLogout}
+              roomName={roomName}
+            />
           </div>
         </div>
       </div>
