@@ -1,4 +1,4 @@
-import { SVGProps, Ref, forwardRef } from "react";
+import { forwardRef, Ref, SVGProps } from "react";
 
 const SvgComponent = (
   props: SVGProps<SVGSVGElement>,
@@ -6,10 +6,10 @@ const SvgComponent = (
 ) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    height={48}
-    width={48}
     ref={ref}
-    className="fill-white text-white"
+    viewBox="0 0 48 48"
+    width="1em"
+    height="1em"
     fill="none"
     {...props}
   >

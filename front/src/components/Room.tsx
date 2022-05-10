@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Video from "twilio-video";
 import Callend from "./Callend";
+import { MicIcon } from "./icons/MicIcon";
+import { ShareIcon } from "./icons/ShareIcon";
+import { VolIcon } from "./icons/VolIcon";
 import Loading from "./Loading";
 import { Participant } from "./Participant";
 
@@ -21,9 +25,6 @@ export const Room: React.FunctionComponent<RoomProps> = ({
 
   useEffect(() => {
     setLoading(true);
-
-    console.log({ token, roomName });
-
     const participantConnected = (participant: Video.RemoteParticipant) => {
       setParticipants((prevParticipants) => [...prevParticipants, participant]);
     };
@@ -75,6 +76,10 @@ export const Room: React.FunctionComponent<RoomProps> = ({
     />
   ));
 
+  const clipCopy = () => {
+    navigator.clipboard.writeText(roomName).then(() => toast("Copiado! 👌"));
+  };
+
   return loading ? (
     <div className="w-full h-full flex items-center justify-center">
       <Loading />
@@ -96,12 +101,36 @@ export const Room: React.FunctionComponent<RoomProps> = ({
           />
         )}
         <div className="absolute w-full bottom-0 left-0 p-6">
-          <div className="flex justify-center">
+          <div className="text-white flex justify-center gap-2 h-12 w-full">
+            <>
+              <button
+                className="bg-gray-900 opacity-90 hover:bg-gray-800 w-12 rounded-full"
+                title="Copiar id de la sesión"
+                onClick={clipCopy}
+                // id="clipcopy-button"
+                // ref={setReferenceElement}
+                // onMouseLeave={() => setTextClipCopy("Copiar id room")}
+              >
+                <ShareIcon className="m-auto text-2xl" />
+              </button>
+            </>
             <button
-              className="bg-red-600 hover:bg-red-500 rounded-2xl px-4"
+              className="bg-gray-900 opacity-90 hover:bg-gray-800 w-12 rounded-full"
+              title={"Apagar"}
+            >
+              <MicIcon className="m-auto text-2xl" />
+            </button>
+            <button
+              className="bg-gray-900 opacity-90 hover:bg-gray-800 w-12 rounded-full"
+              title={"Silenciar"}
+            >
+              <VolIcon className="m-auto text-2xl" />
+            </button>
+            <button
+              className="bg-red-600 hover:bg-red-500 px-3 rounded-2xl"
               onClick={handleLogout}
             >
-              <Callend />
+              <Callend className="m-auto text-4xl" />
             </button>
           </div>
         </div>
