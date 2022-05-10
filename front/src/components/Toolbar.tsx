@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { toast } from "react-toastify";
-import CallEnd from "./icons/Callend";
+import CallEnd from "./icons/CallEnd";
 import { MicIcon } from "./icons/MicIcon";
 import { ShareIcon } from "./icons/ShareIcon";
 import { VolIcon } from "./icons/VolIcon";

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Video from "twilio-video";
-import Loading from "./icons/Loading";
+import LoadingIcon from "./icons/LoadingIcon";
 import { Participant } from "./Participant";
 import { Toolbar } from "./Toolbar";
 
@@ -76,7 +76,7 @@ export const Room: React.FunctionComponent<RoomProps> = ({
 
   return loading || !room ? (
     <div className="w-full h-full flex items-center justify-center">
-      <Loading />
+      <LoadingIcon />
       <span className="text-3xl">Cargando...</span>
     </div>
   ) : (

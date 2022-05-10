@@ -23,5 +23,5 @@ const SvgComponent = (
   </svg>
 );
 
-const Loading = forwardRef(SvgComponent);
-export default Loading;
+const LoadingIcon = forwardRef(SvgComponent);
+export default LoadingIcon;

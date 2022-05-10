@@ -20,5 +20,5 @@ const SvgComponent = (
   </svg>
 );
 
-const Callend = forwardRef(SvgComponent);
-export default Callend;
+const CallEnd = forwardRef(SvgComponent);
+export default CallEnd;
