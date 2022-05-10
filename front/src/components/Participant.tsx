@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
 import Video from "twilio-video";
 
@@ -6,6 +7,7 @@ type ParticipantProps = {
   containerProps?: React.HTMLAttributes<HTMLDivElement>;
   videoProps?: React.HTMLAttributes<HTMLVideoElement>;
   isMuted?: boolean;
+  isRemoteParticipant: boolean;
 };
 
 export const Participant: React.FunctionComponent<ParticipantProps> = ({
@@ -13,6 +15,7 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
   videoProps,
   containerProps,
   isMuted,
+  isRemoteParticipant,
 }) => {
   const [videoTracks, setVideoTracks] = useState<any[]>([]);
   const [audioTracks, setAudioTracks] = useState<any[]>([]);
@@ -82,13 +85,30 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
 
   return (
     <div {...containerProps}>
-      {/* <h3>{participant.identity}</h3> */}
-      <video
-        ref={videoRef}
-        autoPlay
-        {...videoProps}
-        className={"rounded-xl " + videoProps?.className || ""}
-      />
+      <div className="h-full relative flex justify-center">
+        <video
+          ref={videoRef}
+          autoPlay
+          {...videoProps}
+          className={classNames(
+            "rounded-xl",
+            videoProps?.className || "",
+            "absolute",
+            "top-0 left-auto"
+          )}
+        />
+        <h3
+          className={classNames(
+            "text-sm absolute top-2 text-white font-bold bg-black opacity-80 px-4 py-2 rounded-xl",
+            {
+              "text-xs": isRemoteParticipant,
+              "md:text-base": !isRemoteParticipant,
+            }
+          )}
+        >
+          {participant.identity.split("-")[0]}
+        </h3>
+      </div>
       <audio ref={audioRef} autoPlay muted={isMuted} />
     </div>
   );

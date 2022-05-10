@@ -61,6 +61,7 @@ export const Room: React.FunctionComponent<RoomProps> = ({
 
   const remoteParticipants = participants.map((participant) => (
     <Participant
+      isRemoteParticipant={true}
       key={participant.sid}
       participant={participant}
       containerProps={{
@@ -80,6 +81,7 @@ export const Room: React.FunctionComponent<RoomProps> = ({
     <div className="h-full flex flex-col md:flex-row gap-2">
       <div className="relative md:w-10/12 h-full">
         <Participant
+          isRemoteParticipant={false}
           key={room.localParticipant.sid}
           participant={room.localParticipant}
           containerProps={{
