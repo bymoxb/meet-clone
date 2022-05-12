@@ -75,16 +75,16 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
 
       <button
         className={classNames("w-12 rounded-full", {
-          "bg-gray-900 opacity-90 hover:bg-gray-800": !isAudioEnabled,
-          "bg-red-600 hover:bg-red-500": isAudioEnabled,
+          "bg-gray-900 opacity-90 hover:bg-gray-800": isAudioEnabled,
+          "bg-red-600 hover:bg-red-500": !isAudioEnabled,
         })}
         onClick={onMute}
         title={isAudioEnabled ? "Desactivar ensordecimiento" : "Ensordecer"}
       >
         {isAudioEnabled ? (
-          <VolOffIcon className="m-auto text-2xl" />
-        ) : (
           <VolIcon className="m-auto text-2xl" />
+        ) : (
+          <VolOffIcon className="m-auto text-2xl" />
         )}
       </button>
 

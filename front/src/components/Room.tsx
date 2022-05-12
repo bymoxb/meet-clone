@@ -73,7 +73,7 @@ export const Room: React.FunctionComponent<RoomProps> = ({
     />
   ));
 
-  const [isAudioEnabled, setIsAudioEnabled] = useState(false);
+  const [isAudioEnabled, setIsAudioEnabled] = useState(true);
 
   return loading || !room ? (
     <Loading />
