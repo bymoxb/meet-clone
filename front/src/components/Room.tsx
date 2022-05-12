@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import Video from "twilio-video";
 import { Loading } from "./Loading";
 import { Participant } from "./Participant";
@@ -22,10 +23,12 @@ export const Room: React.FunctionComponent<RoomProps> = ({
   useEffect(() => {
     setLoading(true);
     const participantConnected = (participant: Video.RemoteParticipant) => {
+      toast(`${getName(participant.identity)} se ha conectado 👋`);
       setParticipants((prevParticipants) => [...prevParticipants, participant]);
     };
 
     const participantDisconnected = (participant: Video.RemoteParticipant) => {
+      toast(`${getName(participant.identity)} se ha ido 😔`);
       setParticipants((prevParticipants) =>
         prevParticipants.filter((p) => p !== participant)
       );
