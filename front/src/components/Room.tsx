@@ -73,7 +73,7 @@ export const Room: React.FunctionComponent<RoomProps> = ({
     />
   ));
 
-  const [isMuted, setIsMuted] = useState(false);
+  const [isAudioEnabled, setIsAudioEnabled] = useState(false);
 
   return loading || !room ? (
     <Loading />
@@ -94,8 +94,8 @@ export const Room: React.FunctionComponent<RoomProps> = ({
         <div className="absolute w-full bottom-0 left-0 p-6">
           <div className="text-white flex justify-center gap-2 h-12 w-full">
             <Toolbar
-              isMuted={isMuted}
-              setIsMuted={setIsMuted}
+              isAudioEnabled={isAudioEnabled}
+              setIsAudioEnabled={setIsAudioEnabled}
               handleLogout={handleLogout}
               room={room}
             />

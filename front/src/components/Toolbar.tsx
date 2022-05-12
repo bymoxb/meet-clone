@@ -11,13 +11,13 @@ type ToolbarProps = {
   room: Room;
   handleLogout: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   //
-  isMuted: boolean;
-  setIsMuted: React.Dispatch<React.SetStateAction<boolean>>;
+  isAudioEnabled: boolean;
+  setIsAudioEnabled: (op: boolean) => void;
 };
 
 export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
-  isMuted,
-  setIsMuted,
+  isAudioEnabled,
+  setIsAudioEnabled,
   //
   room,
   handleLogout,
@@ -27,21 +27,33 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
   };
 
   const onMute = () => {
-    const text = !isMuted
-      ? "Ensordecido! 🔇"
-      : "Ensordecimiento desactivado! 🔉";
+    let text = "";
 
-    if (isMuted) {
-      room.localParticipant.audioTracks.forEach((track) => {
-        track.track.disable();
-      });
-    } else {
-      room.localParticipant.audioTracks.forEach((track) => {
-        track.track.enable();
-      });
-    }
-    setIsMuted((p) => !p);
+    room.localParticipant.audioTracks.forEach((a) => {
+      if (a.track.isEnabled) {
+        a.track.disable();
+        setIsAudioEnabled(false);
+        text = "Ensordecido! 🔇";
+      } else {
+        a.track.enable();
+        setIsAudioEnabled(true);
+        text = "Ensordecimiento desactivado! 🔉";
+      }
+    });
+
     toast(text);
+
+    /* PARA LA CÁMARA
+    if (isMuted) {
+      // room.localParticipant.videoTracks.forEach((track) => {
+      //   track.track.enable();
+      // });
+    } else {
+      // room.localParticipant.videoTracks.forEach((track) => {
+      //   track.track.disable();
+      // });
+    }
+    */
   };
 
   return (
@@ -63,13 +75,13 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
 
       <button
         className={classNames("w-12 rounded-full", {
-          "bg-gray-900 opacity-90 hover:bg-gray-800": !isMuted,
-          "bg-red-600 hover:bg-red-500": isMuted,
+          "bg-gray-900 opacity-90 hover:bg-gray-800": !isAudioEnabled,
+          "bg-red-600 hover:bg-red-500": isAudioEnabled,
         })}
         onClick={onMute}
-        title={isMuted ? "Desactivar ensordecimiento" : "Ensordecer"}
+        title={isAudioEnabled ? "Desactivar ensordecimiento" : "Ensordecer"}
       >
-        {isMuted ? (
+        {isAudioEnabled ? (
           <VolOffIcon className="m-auto text-2xl" />
         ) : (
           <VolIcon className="m-auto text-2xl" />
