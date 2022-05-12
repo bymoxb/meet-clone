@@ -5,7 +5,10 @@ import Video from "twilio-video";
 type ParticipantProps = {
   participant: any;
   containerProps?: React.HTMLAttributes<HTMLDivElement>;
-  videoProps?: React.HTMLAttributes<HTMLVideoElement>;
+  videoProps?: React.HTMLAttributes<HTMLVideoElement> &
+    React.MediaHTMLAttributes<HTMLVideoElement>;
+  audioProps?: React.HTMLAttributes<HTMLAudioElement> &
+    React.MediaHTMLAttributes<HTMLAudioElement>;
   isRemoteParticipant: boolean;
   isAudioEnabled: boolean;
 };
@@ -13,6 +16,7 @@ type ParticipantProps = {
 export const Participant: React.FunctionComponent<ParticipantProps> = ({
   participant,
   videoProps,
+  audioProps,
   containerProps,
   isRemoteParticipant,
   isAudioEnabled,
@@ -113,7 +117,8 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
         ref={audioRef}
         autoPlay
         className="hidden"
-        muted={!isAudioEnabled || !isRemoteParticipant}
+        // muted={!isAudioEnabled || !isRemoteParticipant}
+        {...audioProps}
       />
     </div>
   );

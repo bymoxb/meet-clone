@@ -90,6 +90,10 @@ export const Room: React.FunctionComponent<RoomProps> = ({
           }}
           videoProps={{
             className: "mx-auto h-full object-cover",
+            muted: true,
+          }}
+          audioProps={{
+            muted: true,
           }}
           isAudioEnabled={isAudioEnabled}
         />
