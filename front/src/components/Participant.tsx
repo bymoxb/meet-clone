@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { useEffect, useRef, useState } from "react";
+import { getName } from "src/utils/participant";
 import Video from "twilio-video";
 
 type ParticipantProps = {
@@ -110,7 +111,7 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
             }
           )}
         >
-          {participant.identity.split("-")[0]}
+          {getName(participant.identity)}
         </h3>
       </div>
       <audio

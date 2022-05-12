@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { getName } from "src/utils/participant";
 import Video from "twilio-video";
 import { Loading } from "./Loading";
 import { Participant } from "./Participant";
