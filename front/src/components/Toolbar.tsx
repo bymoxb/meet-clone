@@ -32,18 +32,18 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
     navigator.clipboard.writeText(room.name).then(() => toast("Copiado! 👌"));
   };
 
-  const toggleMicro = () => {
+  const toggleAudio = () => {
     let text = "";
 
     room.localParticipant.audioTracks.forEach((a) => {
       if (a.track.isEnabled) {
         a.track.disable();
         setIsAudioEnabled(false);
-        text = "Desactivado! 😔";
+        text = "Ensordecido! 🔇";
       } else {
         a.track.enable();
         setIsAudioEnabled(true);
-        text = "Activado! 😊";
+        text = "Ensordecimiento desactivado! 🔊";
       }
     });
 
@@ -81,13 +81,13 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
           "bg-gray-900 opacity-90 hover:bg-gray-800": isAudioEnabled,
           "bg-red-600 hover:bg-red-500": !isAudioEnabled,
         })}
-        onClick={toggleMicro}
-        title={isAudioEnabled ? "Desactivar" : "Activar"}
+        onClick={toggleAudio}
+        title={isAudioEnabled ? "Ensordecer" : "Desactivar ensordecimiento"}
       >
         {isAudioEnabled ? (
-          <MicIcon className="m-auto text-2xl" />
+          <VolIcon className="m-auto text-2xl" />
         ) : (
-          <MicOffIcon className="m-auto text-2xl" />
+          <VolOffIcon className="m-auto text-2xl" />
         )}
       </button>
 

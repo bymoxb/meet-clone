@@ -109,7 +109,12 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
           {participant.identity.split("-")[0]}
         </h3>
       </div>
-      <audio ref={audioRef} autoPlay muted={!isAudioEnabled} />
+      <audio
+        ref={audioRef}
+        autoPlay
+        className="hidden"
+        muted={!isAudioEnabled || !isRemoteParticipant}
+      />
     </div>
   );
 };
