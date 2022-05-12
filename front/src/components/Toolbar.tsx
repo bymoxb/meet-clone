@@ -39,11 +39,11 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
       if (a.track.isEnabled) {
         a.track.disable();
         setIsAudioEnabled(false);
-        text = "Ensordecido! 🔇";
+        text = "Micrófono desactivado! 🙊";
       } else {
         a.track.enable();
         setIsAudioEnabled(true);
-        text = "Ensordecimiento desactivado! 🔊";
+        text = "Micrófono activado! 🐵";
       }
     });
 
@@ -55,12 +55,12 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
     room.localParticipant.videoTracks.forEach((track) => {
       if (track.track.isEnabled) {
         track.track.disable();
-        text = "Desactivado! 🥺";
+        text = "Cámara desactivada! 🥺";
         setIsVideoEnabled(false);
       } else {
         track.track.enable();
         setIsVideoEnabled(true);
-        text = "Activado! 😎";
+        text = "Cámara activada! 😎";
       }
     });
     toast(text);
@@ -82,12 +82,12 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
           "bg-red-600 hover:bg-red-500": !isAudioEnabled,
         })}
         onClick={toggleAudio}
-        title={isAudioEnabled ? "Ensordecer" : "Desactivar ensordecimiento"}
+        title={isAudioEnabled ? "Desactivar" : "Activar"}
       >
         {isAudioEnabled ? (
-          <VolIcon className="m-auto text-2xl" />
+          <MicIcon className="m-auto text-2xl" />
         ) : (
-          <VolOffIcon className="m-auto text-2xl" />
+          <MicOffIcon className="m-auto text-2xl" />
         )}
       </button>
 
