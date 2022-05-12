@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { Room } from "twilio-video";
 import CallEnd from "./icons/CallEnd";
 import { MicIcon } from "./icons/MicIcon";
+import { MicOffIcon } from "./icons/MicOffIcon";
 import { ShareIcon } from "./icons/ShareIcon";
 import { VolIcon } from "./icons/VolIcon";
 import { VolOffIcon } from "./icons/VolOffIcon";
@@ -26,18 +27,18 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
     navigator.clipboard.writeText(room.name).then(() => toast("Copiado! 👌"));
   };
 
-  const onMute = () => {
+  const toggleMicro = () => {
     let text = "";
 
     room.localParticipant.audioTracks.forEach((a) => {
       if (a.track.isEnabled) {
         a.track.disable();
         setIsAudioEnabled(false);
-        text = "Ensordecido! 🔇";
+        text = "Desactivado! 😔";
       } else {
         a.track.enable();
         setIsAudioEnabled(true);
-        text = "Ensordecimiento desactivado! 🔉";
+        text = "Activado! 😊";
       }
     });
 
@@ -67,13 +68,21 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
       </button>
 
       <button
-        className="bg-gray-900 opacity-90 hover:bg-gray-800 w-12 rounded-full"
-        title={"Apagar"}
+        className={classNames("w-12 rounded-full", {
+          "bg-gray-900 opacity-90 hover:bg-gray-800": isAudioEnabled,
+          "bg-red-600 hover:bg-red-500": !isAudioEnabled,
+        })}
+        onClick={toggleMicro}
+        title={isAudioEnabled ? "Desactivar" : "Activar"}
       >
-        <MicIcon className="m-auto text-2xl" />
+        {isAudioEnabled ? (
+          <MicIcon className="m-auto text-2xl" />
+        ) : (
+          <MicOffIcon className="m-auto text-2xl" />
+        )}
       </button>
 
-      <button
+      {/* <button
         className={classNames("w-12 rounded-full", {
           "bg-gray-900 opacity-90 hover:bg-gray-800": isAudioEnabled,
           "bg-red-600 hover:bg-red-500": !isAudioEnabled,
@@ -86,7 +95,7 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
         ) : (
           <VolOffIcon className="m-auto text-2xl" />
         )}
-      </button>
+      </button> */}
 
       <button
         className="bg-red-600 hover:bg-red-500 px-3 rounded-2xl"
