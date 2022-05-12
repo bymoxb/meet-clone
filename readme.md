@@ -6,6 +6,7 @@
 
 - Front: **React**
 - Back: **NestJS**
+- Deploy: **Docker** | **DigitalOcean**
 
 ## Requisitos
 
@@ -21,3 +22,4 @@
 4. [How to Dark Mode in React and Tailwind CSS](https://jeffjadulco.com/blog/dark-mode-react-tailwind)
 5. [Creating a server with Node/Express](https://www.twilio.com/docs/video/tutorials/get-started-with-twilio-video-node-express-server)
 6. [Material Symbols](https://fonts.google.com/icons)
+7. [DigitalOcean | REFERRAL LINK](https://m.do.co/c/c088a55413a2)
