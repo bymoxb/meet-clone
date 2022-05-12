@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { toast } from "react-toastify";
+import { Room } from "twilio-video";
 import CallEnd from "./icons/CallEnd";
 import { MicIcon } from "./icons/MicIcon";
 import { ShareIcon } from "./icons/ShareIcon";
@@ -7,7 +8,7 @@ import { VolIcon } from "./icons/VolIcon";
 import { VolOffIcon } from "./icons/VolOffIcon";
 
 type ToolbarProps = {
-  roomName: string;
+  room: Room;
   handleLogout: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   //
   isMuted: boolean;
@@ -18,11 +19,11 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
   isMuted,
   setIsMuted,
   //
-  roomName,
+  room,
   handleLogout,
 }) => {
   const clipCopy = () => {
-    navigator.clipboard.writeText(roomName).then(() => toast("Copiado! 👌"));
+    navigator.clipboard.writeText(room.name).then(() => toast("Copiado! 👌"));
   };
 
   const onMute = () => {
@@ -30,6 +31,15 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
       ? "Ensordecido! 🔇"
       : "Ensordecimiento desactivado! 🔉";
 
+    if (isMuted) {
+      room.localParticipant.audioTracks.forEach((track) => {
+        track.track.disable();
+      });
+    } else {
+      room.localParticipant.audioTracks.forEach((track) => {
+        track.track.enable();
+      });
+    }
     setIsMuted((p) => !p);
     toast(text);
   };

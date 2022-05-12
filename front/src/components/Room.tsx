@@ -97,7 +97,7 @@ export const Room: React.FunctionComponent<RoomProps> = ({
               isMuted={isMuted}
               setIsMuted={setIsMuted}
               handleLogout={handleLogout}
-              roomName={roomName}
+              room={room}
             />
           </div>
         </div>

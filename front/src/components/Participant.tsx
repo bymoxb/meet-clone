@@ -6,7 +6,6 @@ type ParticipantProps = {
   participant: any;
   containerProps?: React.HTMLAttributes<HTMLDivElement>;
   videoProps?: React.HTMLAttributes<HTMLVideoElement>;
-  isMuted?: boolean;
   isRemoteParticipant: boolean;
 };
 
@@ -14,7 +13,6 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
   participant,
   videoProps,
   containerProps,
-  isMuted,
   isRemoteParticipant,
 }) => {
   const [videoTracks, setVideoTracks] = useState<any[]>([]);
@@ -83,11 +81,6 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
     }
   }, [audioTracks]);
 
-  useEffect(() => {
-    audioRef.current.defaultMuted = isMuted;
-    audioRef.current.muted = isMuted;
-  }, [isMuted]);
-
   return (
     <div {...containerProps}>
       <div className="h-full relative flex justify-center">
@@ -114,7 +107,7 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
           {participant.identity.split("-")[0]}
         </h3>
       </div>
-      <audio ref={audioRef} autoPlay muted={isMuted} />
+      <audio ref={audioRef} autoPlay />
     </div>
   );
 };
