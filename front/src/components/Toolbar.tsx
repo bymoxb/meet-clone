@@ -1,10 +1,13 @@
 import classNames from "classnames";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { Room } from "twilio-video";
 import CallEnd from "./icons/CallEnd";
 import { MicIcon } from "./icons/MicIcon";
 import { MicOffIcon } from "./icons/MicOffIcon";
 import { ShareIcon } from "./icons/ShareIcon";
+import { VideoCamIcon } from "./icons/VideoCamIcon";
+import { VideoCamOffIcon } from "./icons/VideoCamOffIcon";
 import { VolIcon } from "./icons/VolIcon";
 import { VolOffIcon } from "./icons/VolOffIcon";
 
@@ -23,6 +26,8 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
   room,
   handleLogout,
 }) => {
+  const [isVideoEnabled, setIsVideoEnabled] = useState(true);
+
   const clipCopy = () => {
     navigator.clipboard.writeText(room.name).then(() => toast("Copiado! 👌"));
   };
@@ -43,18 +48,22 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
     });
 
     toast(text);
+  };
 
-    /* PARA LA CÁMARA
-    if (isMuted) {
-      // room.localParticipant.videoTracks.forEach((track) => {
-      //   track.track.enable();
-      // });
-    } else {
-      // room.localParticipant.videoTracks.forEach((track) => {
-      //   track.track.disable();
-      // });
-    }
-    */
+  const toggleCam = () => {
+    let text = "";
+    room.localParticipant.videoTracks.forEach((track) => {
+      if (track.track.isEnabled) {
+        track.track.disable();
+        text = "Desactivado! 🥺";
+        setIsVideoEnabled(false);
+      } else {
+        track.track.enable();
+        setIsVideoEnabled(true);
+        text = "Activado! 😎";
+      }
+    });
+    toast(text);
   };
 
   return (
@@ -82,20 +91,20 @@ export const Toolbar: React.FunctionComponent<ToolbarProps> = ({
         )}
       </button>
 
-      {/* <button
+      <button
         className={classNames("w-12 rounded-full", {
-          "bg-gray-900 opacity-90 hover:bg-gray-800": isAudioEnabled,
-          "bg-red-600 hover:bg-red-500": !isAudioEnabled,
+          "bg-gray-900 opacity-90 hover:bg-gray-800": isVideoEnabled,
+          "bg-red-600 hover:bg-red-500": !isVideoEnabled,
         })}
-        onClick={onMute}
-        title={isAudioEnabled ? "Desactivar ensordecimiento" : "Ensordecer"}
+        onClick={toggleCam}
+        title={isVideoEnabled ? "Desactivar" : "Activar"}
       >
-        {isAudioEnabled ? (
-          <VolIcon className="m-auto text-2xl" />
+        {isVideoEnabled ? (
+          <VideoCamIcon className="m-auto text-2xl" />
         ) : (
-          <VolOffIcon className="m-auto text-2xl" />
+          <VideoCamOffIcon className="m-auto text-2xl" />
         )}
-      </button> */}
+      </button>
 
       <button
         className="bg-red-600 hover:bg-red-500 px-3 rounded-2xl"
