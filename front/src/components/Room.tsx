@@ -59,6 +59,8 @@ export const Room: React.FunctionComponent<RoomProps> = ({
     };
   }, [roomName, token]);
 
+  const [isAudioEnabled, setIsAudioEnabled] = useState(true);
+
   const remoteParticipants = participants.map((participant) => (
     <Participant
       isRemoteParticipant={true}
@@ -70,10 +72,9 @@ export const Room: React.FunctionComponent<RoomProps> = ({
       videoProps={{
         className: "h-full object-cover",
       }}
+      isAudioEnabled={isAudioEnabled}
     />
   ));
-
-  const [isAudioEnabled, setIsAudioEnabled] = useState(true);
 
   return loading || !room ? (
     <Loading />
@@ -90,6 +91,7 @@ export const Room: React.FunctionComponent<RoomProps> = ({
           videoProps={{
             className: "mx-auto h-full object-cover",
           }}
+          isAudioEnabled={isAudioEnabled}
         />
         <div className="absolute w-full bottom-0 left-0 p-6">
           <div className="text-white flex justify-center gap-2 h-12 w-full">

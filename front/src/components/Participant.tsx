@@ -7,6 +7,7 @@ type ParticipantProps = {
   containerProps?: React.HTMLAttributes<HTMLDivElement>;
   videoProps?: React.HTMLAttributes<HTMLVideoElement>;
   isRemoteParticipant: boolean;
+  isAudioEnabled: boolean;
 };
 
 export const Participant: React.FunctionComponent<ParticipantProps> = ({
@@ -14,6 +15,7 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
   videoProps,
   containerProps,
   isRemoteParticipant,
+  isAudioEnabled,
 }) => {
   const [videoTracks, setVideoTracks] = useState<any[]>([]);
   const [audioTracks, setAudioTracks] = useState<any[]>([]);
@@ -107,7 +109,7 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
           {participant.identity.split("-")[0]}
         </h3>
       </div>
-      <audio ref={audioRef} autoPlay muted />
+      <audio ref={audioRef} autoPlay muted={!isAudioEnabled} />
     </div>
   );
 };
