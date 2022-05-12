@@ -32,7 +32,18 @@ const AppBase = () => {
         </div>
         <div className="flex items-center gap-2">
           <span>
-            {now.toLocaleTimeString()} - {now.toDateString()}
+            {now.toLocaleTimeString("es", {
+              hour: "2-digit",
+              minute: "2-digit",
+              second: "2-digit",
+            })}{" "}
+            -{" "}
+            {now.toLocaleDateString("es", {
+              weekday: "short",
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            })}
           </span>
           <ToggleTheme />
         </div>
