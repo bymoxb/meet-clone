@@ -104,10 +104,10 @@ export const Participant: React.FunctionComponent<ParticipantProps> = ({
         />
         <h3
           className={classNames(
-            "text-sm absolute top-2 text-white font-bold bg-black opacity-80 px-4 py-2 rounded-xl",
+            "text-sm absolute text-white bg-black opacity-80 rounded-xl",
             {
-              "text-xs": isRemoteParticipant,
-              "md:text-base": !isRemoteParticipant,
+              "text-xs top-1 p-1": isRemoteParticipant,
+              "md:text-base top-2 px-4 py-2 font-bold": !isRemoteParticipant,
             }
           )}
         >

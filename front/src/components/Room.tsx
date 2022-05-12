@@ -65,10 +65,10 @@ export const Room: React.FunctionComponent<RoomProps> = ({
       key={participant.sid}
       participant={participant}
       containerProps={{
-        className: "shrink-0 h-full md:h-fit",
+        className: "w-32 md:h-36 md:w-auto",
       }}
       videoProps={{
-        className: "h-full",
+        className: "h-full object-cover",
       }}
     />
   ));
